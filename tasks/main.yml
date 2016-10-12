@@ -57,29 +57,22 @@
     remote_src: yes
 
 - name: "Compile Python"
-  command: "./configure  --prefix {{ python_home }}"
+  shell: "./configure  --prefix {{ python_home }}"
   args:
     chdir: "{{ python_temp_path }}"
 
-- command: "make"
+- shell: "make"
   args:
     chdir: "{{ python_temp_path }}"
 
-- command: "make install"
+- shell: "make install"
   args:
     chdir: "{{ python_temp_path }}"
 
 - name: "Install Python environment variables"
   template:
-    src: "templates/python2.sh.j2"
-    dest: "/etc/profile.d/python.sh"
-  when: "python_major_version == 2"
-
-- name: "Install Python environment variables"
-  template:
-    src: "templates/python2.sh.j2"
-    dest: "/etc/profile.d/python.sh"
-  when: "python_major_version == 3"
+    src: "templates/python.sh.j2"
+    dest: "/etc/profile.d/python{{ python_major_version }}.sh"
 
 - name: "Clean Temporary files"
   file:
