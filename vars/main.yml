@@ -1,0 +1,37 @@
+urls:
+    2.7.12:
+        source:
+            file: Python-2.7.12.tgz
+            dir: Python-2.7.12
+            url: 'https://www.python.org/ftp/python/2.7.12/Python-2.7.12.tgz'
+            hash: 3CB522D17463DFA69A155AB18CFFA399B358C966C0363D6C8B5B3BF1384DA4B6
+    3.3.6:
+        source:
+            file: Python-3.3.6.tgz
+            dir: Python-3.3.6
+            url: 'https://www.python.org/ftp/python/3.3.6/Python-3.3.6.tgz'
+            hash: 0A58AD1F1DEF4ECC90B18B0C410A3A0E1A48CF7692C75D1F83D0AF080E5D2034
+    3.4.5:
+        source:
+            file: Python-3.4.5.tgz
+            dir: Python-3.4.5
+            url: 'https://www.python.org/ftp/python/3.4.5/Python-3.4.5.tgz'
+            hash: 997ACA4DD8692F3C954658A3DB11C1D0862BCBF8EADD6A164746EB33D317C034
+    3.5.2:
+        source:
+            file: Python-3.5.2.tgz
+            dir: Python-3.5.2
+            url: 'https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz'
+            hash: 1524B840E42CF3B909E8F8DF67C1724012C7DC7F9D076D4FEEF2D3EFF031E8A0
+    3.6.0b1:
+        source:
+            file: Python-3.6.0b1.tgz
+            dir: Python-3.6.0b1
+            url: 'https://www.python.org/ftp/python/3.6.0/Python-3.6.0b1.tgz'
+            hash: 41E8E4E8F6D44992F9CB979DA2A2927C60554045FE0A2EE556E0BF8FE5F7014F
+    3.6.0a4:
+        source:
+            file: Python-3.6.0a4.tgz
+            dir: Python-3.6.0a4
+            url: 'https://www.python.org/ftp/python/3.6.0/Python-3.6.0a4.tgz'
+            hash: 3CEDD7C1462B41648C779B0C88D0ACF4FA298179014FFE75791AF9DA166FED62

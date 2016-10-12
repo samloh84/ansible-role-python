@@ -1,0 +1,87 @@
+- set_fact:
+    download_dir: "{{ role_path }}/files"
+    temp_dir: "{{ tmp_prefix }}/python-{{ python_version }}"
+    python_dir: "{{ urls[python_version].source.dir }}"
+    python_url: "{{ urls[python_version].source.url }}"
+    python_hash: "{{ urls[python_version].source.hash }}"
+    python_filename: "{{ urls[python_version].source.file }}"
+    python_major_version: "{{ python_version | regex_replace('^(\\d+)\\.(\\d+)\\.(\\d+[a-zA-Z0-9]*)', '\\1') }}"
+
+- set_fact:
+    python_home: "{{ prefix }}/{{ python_dir }}"
+    python_archive_temp_path: "{{ temp_dir }}/{{ python_filename }}"
+    python_archive_download_path: "{{ download_dir }}/{{ python_filename }}"
+    python_temp_path: "{{ temp_dir }}/{{ python_dir }}"
+
+- debug:
+    msg: "{{ python_major_version }}"
+
+- name: "Create Temporary Directory {{ temp_dir }}"
+  file:
+    path: "{{ temp_dir }}"
+    state: directory
+
+- name: "Create Python Directory {{ python_home }}"
+  file:
+    path: "{{ python_home }}"
+    state: directory
+
+- name: "Install GCC C++"
+  yum:
+    name: "gcc-c++"
+    state: present
+
+- name: "Create Download Directory on control server: {{ download_dir }}"
+  delegate_to: 127.0.0.1
+  file:
+    path: "{{ download_dir }}"
+    state: directory
+
+
+- name: "Download Python archive to control server Download Path: {{ python_archive_download_path }}"
+  delegate_to: 127.0.0.1
+  get_url:
+    url: "{{ python_url }}"
+    dest: "{{ python_archive_download_path }}"
+    checksum: "sha256:{{ python_hash }}"
+
+- name: "Copy Python archive to Temporary Path: {{ python_archive_temp_path }}"
+  copy:
+    src: "{{ python_archive_download_path }}"
+    dest: "{{ python_archive_temp_path }}"
+
+- name: "Extract Python archive to Directory: {{ temp_dir }}"
+  unarchive:
+    src: "{{ python_archive_temp_path }}"
+    dest: "{{ temp_dir }}"
+    remote_src: yes
+
+- name: "Compile Python"
+  command: "./configure  --prefix {{ python_home }}"
+  args:
+    chdir: "{{ python_temp_path }}"
+
+- command: "make"
+  args:
+    chdir: "{{ python_temp_path }}"
+
+- command: "make install"
+  args:
+    chdir: "{{ python_temp_path }}"
+
+- name: "Install Python environment variables"
+  template:
+    src: "templates/python2.sh.j2"
+    dest: "/etc/profile.d/python.sh"
+  when: "python_major_version == 2"
+
+- name: "Install Python environment variables"
+  template:
+    src: "templates/python2.sh.j2"
+    dest: "/etc/profile.d/python.sh"
+  when: "python_major_version == 3"
+
+- name: "Clean Temporary files"
+  file:
+    path: "{{ tmp_prefix }}"
+    state: absent
