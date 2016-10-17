@@ -73,6 +73,7 @@
   template:
     src: "python.sh.j2"
     dest: "/etc/profile.d/python{{ python_major_version }}.sh"
+    mode: 0644
 
 
 - name: "Upgrade Pip"
