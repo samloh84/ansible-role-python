@@ -1,37 +1,67 @@
 urls:
+    3.4.5:
+        signature:
+            file: Python-3.4.5.tgz.asc
+            dir: null
+            url: 'https://www.python.org/ftp/python/3.4.5/Python-3.4.5.tgz.asc'
+            hash: D01A158AB360C161EC2CDDC059BE571AE76742496ABBB823257C6DDAF518AC81
+        source:
+            file: Python-3.4.5.tgz
+            dir: Python-3.4.5
+            url: 'https://www.python.org/ftp/python/3.4.5/Python-3.4.5.tgz'
+            hash: 997ACA4DD8692F3C954658A3DB11C1D0862BCBF8EADD6A164746EB33D317C034
+    3.6.0b1:
+        signature:
+            file: Python-3.6.0b1.tgz.asc
+            dir: null
+            url: 'https://www.python.org/ftp/python/3.6.0/Python-3.6.0b1.tgz.asc'
+            hash: 1747CD382E9389F2E0612E11F55EE363CDC42BD3BA514FD0F76F2D3153D1A925
+        source:
+            file: Python-3.6.0b1.tgz
+            dir: Python-3.6.0b1
+            url: 'https://www.python.org/ftp/python/3.6.0/Python-3.6.0b1.tgz'
+            hash: 41E8E4E8F6D44992F9CB979DA2A2927C60554045FE0A2EE556E0BF8FE5F7014F
     2.7.12:
+        signature:
+            file: Python-2.7.12.tgz.asc
+            dir: null
+            url: 'https://www.python.org/ftp/python/2.7.12/Python-2.7.12.tgz.asc'
+            hash: CDB6F6F914BF1625CD8BBE4D8E2731E4C08D46E126A476594D778EF90827F584
         source:
             file: Python-2.7.12.tgz
             dir: Python-2.7.12
             url: 'https://www.python.org/ftp/python/2.7.12/Python-2.7.12.tgz'
             hash: 3CB522D17463DFA69A155AB18CFFA399B358C966C0363D6C8B5B3BF1384DA4B6
     3.3.6:
+        signature:
+            file: Python-3.3.6.tgz.asc
+            dir: null
+            url: 'https://www.python.org/ftp/python/3.3.6/Python-3.3.6.tgz.asc'
+            hash: 25F1973B6354F4273B64B9E4E5C40F453AAECE4EC058A7CF6242805CBA4A609E
         source:
             file: Python-3.3.6.tgz
             dir: Python-3.3.6
             url: 'https://www.python.org/ftp/python/3.3.6/Python-3.3.6.tgz'
             hash: 0A58AD1F1DEF4ECC90B18B0C410A3A0E1A48CF7692C75D1F83D0AF080E5D2034
-    3.4.5:
-        source:
-            file: Python-3.4.5.tgz
-            dir: Python-3.4.5
-            url: 'https://www.python.org/ftp/python/3.4.5/Python-3.4.5.tgz'
-            hash: 997ACA4DD8692F3C954658A3DB11C1D0862BCBF8EADD6A164746EB33D317C034
-    3.5.2:
-        source:
-            file: Python-3.5.2.tgz
-            dir: Python-3.5.2
-            url: 'https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz'
-            hash: 1524B840E42CF3B909E8F8DF67C1724012C7DC7F9D076D4FEEF2D3EFF031E8A0
-    3.6.0b1:
-        source:
-            file: Python-3.6.0b1.tgz
-            dir: Python-3.6.0b1
-            url: 'https://www.python.org/ftp/python/3.6.0/Python-3.6.0b1.tgz'
-            hash: 41E8E4E8F6D44992F9CB979DA2A2927C60554045FE0A2EE556E0BF8FE5F7014F
     3.6.0a4:
+        signature:
+            file: Python-3.6.0a4.tgz.asc
+            dir: null
+            url: 'https://www.python.org/ftp/python/3.6.0/Python-3.6.0a4.tgz.asc'
+            hash: 3E8CA6F7C5A64E4D1CC2C0C10CF9B8A3300784D1E241D2DE57EF08BD9D1D89CD
         source:
             file: Python-3.6.0a4.tgz
             dir: Python-3.6.0a4
             url: 'https://www.python.org/ftp/python/3.6.0/Python-3.6.0a4.tgz'
             hash: 3CEDD7C1462B41648C779B0C88D0ACF4FA298179014FFE75791AF9DA166FED62
+    3.5.2:
+        signature:
+            file: Python-3.5.2.tgz.asc
+            dir: null
+            url: 'https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz.asc'
+            hash: 7E4A01A66E4412DFB7705F6016BC4729E53A5197FBC5E4D4B9006B7CF95D3F06
+        source:
+            file: Python-3.5.2.tgz
+            dir: Python-3.5.2
+            url: 'https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz'
+            hash: 1524B840E42CF3B909E8F8DF67C1724012C7DC7F9D076D4FEEF2D3EFF031E8A0

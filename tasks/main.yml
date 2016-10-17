@@ -71,8 +71,14 @@
 
 - name: "Install Python environment variables"
   template:
-    src: "templates/python.sh.j2"
+    src: "python.sh.j2"
     dest: "/etc/profile.d/python{{ python_major_version }}.sh"
+
+
+- name: "Upgrade Pip"
+  shell: "source /etc/profile.d/python{{ python_major_version }}.sh && pip install -U pip"
+
+
 
 - name: "Clean Temporary files"
   file:
