@@ -1,6 +1,6 @@
 - set_fact:
     download_dir: "{{ role_path }}/files"
-    temp_dir: "{{ tmp_prefix }}/python-{{ python_version }}"
+    tmp_dir: "{{ tmp_prefix }}/python-{{ python_version }}"
     python_dir: "{{ urls[python_version].source.dir }}"
     python_url: "{{ urls[python_version].source.url }}"
     python_hash: "{{ urls[python_version].source.hash }}"
@@ -9,22 +9,21 @@
 
 - set_fact:
     python_home: "{{ prefix }}/{{ python_dir }}"
-    python_archive_temp_path: "{{ temp_dir }}/{{ python_filename }}"
+    python_archive_temp_path: "{{ tmp_dir }}/{{ python_filename }}"
     python_archive_download_path: "{{ download_dir }}/{{ python_filename }}"
-    python_temp_path: "{{ temp_dir }}/{{ python_dir }}"
+    python_temp_path: "{{ tmp_dir }}/{{ python_dir }}"
 
 - debug:
     msg: "{{ python_major_version }}"
 
-- name: "Create Temporary Directory {{ temp_dir }}"
+- name: "Create Directories"
   file:
-    path: "{{ temp_dir }}"
+    path: "{{ item }}"
     state: directory
-
-- name: "Create Python Directory {{ python_home }}"
-  file:
-    path: "{{ python_home }}"
-    state: directory
+    mode: 0755
+  with_items:
+    - "{{ tmp_dir }}"
+    - "{{ python_home }}"
 
 - name: "Install GCC C++"
   yum:
@@ -36,7 +35,6 @@
   file:
     path: "{{ download_dir }}"
     state: directory
-
 
 - name: "Download Python archive to control server Download Path: {{ python_archive_download_path }}"
   delegate_to: 127.0.0.1
@@ -50,10 +48,10 @@
     src: "{{ python_archive_download_path }}"
     dest: "{{ python_archive_temp_path }}"
 
-- name: "Extract Python archive to Directory: {{ temp_dir }}"
+- name: "Extract Python archive to Directory: {{ tmp_dir }}"
   unarchive:
     src: "{{ python_archive_temp_path }}"
-    dest: "{{ temp_dir }}"
+    dest: "{{ tmp_dir }}"
     remote_src: yes
 
 - name: "Compile Python"
@@ -80,8 +78,18 @@
   shell: "source /etc/profile.d/python{{ python_major_version }}.sh && pip install -U pip"
 
 
-
 - name: "Clean Temporary files"
   file:
     path: "{{ tmp_prefix }}"
     state: absent
+
+- name: "Fix Permissions"
+  shell: "{{ item }}"
+  args:
+    chdir: "{{ prefix }}"
+  with_items:
+    - "chown -R root:root ."
+    - "find . -perm -u+r -exec chmod a+r {} \\;"
+    - "find . -perm -u+w -exec chmod a+w {} \\;"
+    - "find . -perm -u+x -exec chmod a+x {} \\;"
+
