@@ -1,5 +1,4 @@
 #!/bin/bash
 
 export PYTHON{{ python_major_version }}_HOME={{ python_home }}
-export PATH=${PATH}:${PYTHON{{ python_major_version }}_HOME}/bin
-
+export PATH=${PYTHON{{ python_major_version }}_HOME}/bin:${PATH}

@@ -86,7 +86,7 @@
     mode: 0644
 
 - name: "Upgrade Pip"
-  shell: "source /etc/profile.d/python{{ python_major_version }}.sh && python{{python_major_version}} -m ensurepip && pip install -U pip"
+  shell: "source /etc/profile.d/python{{ python_major_version }}.sh && python{{python_major_version}} -m ensurepip && pip{{ python_major_version }} install -U pip"
 
 
 - name: "Clean Temporary files"
