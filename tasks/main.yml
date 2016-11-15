@@ -69,14 +69,17 @@
 - name: "Compile Python"
   shell: "./configure  --prefix {{ python_home }}"
   args:
+    executable: /bin/bash
     chdir: "{{ python_temp_path }}"
 
 - shell: "make"
   args:
+    executable: /bin/bash
     chdir: "{{ python_temp_path }}"
 
 - shell: "make install"
   args:
+    executable: /bin/bash
     chdir: "{{ python_temp_path }}"
 
 - name: "Install Python environment variables"
@@ -87,7 +90,8 @@
 
 - name: "Upgrade Pip"
   shell: "source /etc/profile.d/python{{ python_major_version }}.sh && python{{python_major_version}} -m ensurepip && pip{{ python_major_version }} install -U pip"
-
+  args:
+    executable: /bin/bash
 
 - name: "Clean Temporary files"
   file:
@@ -96,6 +100,8 @@
 
 - name: "Fix Permissions"
   shell: "{{ item }}"
+  args:
+    executable: /bin/bash
   with_items:
     - "chown -R root:root {{ python_home }}"
     - "find {{ python_home }} -perm -u+r -exec chmod a+r {} \\;"
