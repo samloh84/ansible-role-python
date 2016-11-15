@@ -16,6 +16,18 @@
 - debug:
     msg: "{{ python_major_version }}"
 
+- name: "Install Python Dependencies"
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - openssl-devel
+    - bzip2-devel
+    - zlib-devel
+    - sqlite-devel
+    - readline-devel
+    - gdbm-devel
+
 - name: "Create Directories"
   file:
     path: "{{ item }}"
@@ -73,9 +85,8 @@
     dest: "/etc/profile.d/python{{ python_major_version }}.sh"
     mode: 0644
 
-
 - name: "Upgrade Pip"
-  shell: "source /etc/profile.d/python{{ python_major_version }}.sh && pip install -U pip"
+  shell: "source /etc/profile.d/python{{ python_major_version }}.sh && python{{python_major_version}} -m ensurepip && pip install -U pip"
 
 
 - name: "Clean Temporary files"
@@ -85,11 +96,8 @@
 
 - name: "Fix Permissions"
   shell: "{{ item }}"
-  args:
-    chdir: "{{ prefix }}"
   with_items:
-    - "chown -R root:root ."
-    - "find . -perm -u+r -exec chmod a+r {} \\;"
-    - "find . -perm -u+w -exec chmod a+w {} \\;"
-    - "find . -perm -u+x -exec chmod a+x {} \\;"
-
+    - "chown -R root:root {{ python_home }}"
+    - "find {{ python_home }} -perm -u+r -exec chmod a+r {} \\;"
+    - "find {{ python_home }} -perm -u+w -exec chmod a+w {} \\;"
+    - "find {{ python_home }} -perm -u+x -exec chmod a+x {} \\;"
